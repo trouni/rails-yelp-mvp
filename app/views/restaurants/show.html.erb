@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-12">
+      <div class="main">
+        <h1>Details for <%= @restaurant.name %></h1>
+        <p><%= ('<i class="fas fa-star"></i>' * @restaurant.rating + ('<i class="far fa-star"></i>' * (5 - @restaurant.rating))).html_safe if @restaurant.rating %></p>
+        <p><%= @restaurant.category.capitalize %></p>
+        <p><%= @restaurant.address %></p>
+        <p><%= @restaurant.phone_number %></p>
+        <h3>Reviews</h3>
+        <%= link_to "Leave a review", new_restaurant_review_path(@restaurant) %>
+        <div>
+          <% @restaurant.reviews.each do |review| %>
+            <p>
+              <%= ('<i class="fas fa-star"></i>' * review.rating + ('<i class="far fa-star"></i>' * (5 - review.rating))).html_safe %>
+              <%= review.content %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+      <div class="menu-actions">
+        <%#= link_to edit_restaurant_path(@restaurant) do %>
+          <!-- <i class="fas fa-edit"></i> -->
+        <%# end %>
+        <%#= link_to restaurant_path(@restaurant), method: :delete do %>
+          <!-- <i class="fas fa-trash"></i> -->
+        <%# end %>
+      </div>
+
+    </div>
+  </div>
+</div>

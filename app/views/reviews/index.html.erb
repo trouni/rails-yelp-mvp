@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-6">
+      <div class="header d-flex justify-content-between align-content-around my-3">
+        <h1>All reviews</h1>
+      </div>
+      <% @reviews.each do |review| %>
+        <div class="card p-3">
+          <div class="card-title d-flex justify-content-between">
+            <div>
+                <p>Review for <%= link_to review.restaurant.name, restaurant_path(review.restaurant) %></p>
+                <p>
+                  <%= ('<i class="fas fa-star"></i>' * review.rating + ('<i class="far fa-star"></i>' * (5 - review.rating))).html_safe %>
+                  <%= review.content %>
+                </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

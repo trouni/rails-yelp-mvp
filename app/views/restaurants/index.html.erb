@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-6">
+      <div class="header d-flex justify-content-between align-content-around my-3">
+        <h1>All restaurants</h1>
+      </div>
+      <% @restaurants.each do |restaurant| %>
+        <div class="card p-3">
+          <div class="card-title d-flex justify-content-between">
+            <h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
+            <p><%= ('<i class="fas fa-star"></i>' * restaurant.rating + ('<i class="far fa-star"></i>' * (5 - restaurant.rating))).html_safe if restaurant.rating %></p>
+          </div>
+          <small><%= restaurant.category.capitalize %></small>
+          <p><%= restaurant.address %></p>
+          <p><%= restaurant.phone_number %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
