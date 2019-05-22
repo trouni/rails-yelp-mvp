@@ -2,20 +2,29 @@
   <div class="row my-3">
     <div class="col-12">
       <div class="main">
-        <h1>Details for <%= @restaurant.name %></h1>
-        <p><%= ('<i class="fas fa-star"></i>' * @restaurant.rating + ('<i class="far fa-star"></i>' * (5 - @restaurant.rating))).html_safe if @restaurant.rating %></p>
-        <p><%= @restaurant.category.capitalize %></p>
-        <p><%= @restaurant.address %></p>
-        <p><%= @restaurant.phone_number %></p>
-        <h3>Reviews</h3>
-        <%= link_to "Leave a review", new_restaurant_review_path(@restaurant) %>
-        <div>
-          <% @restaurant.reviews.each do |review| %>
-            <p>
-              <%= ('<i class="fas fa-star"></i>' * review.rating + ('<i class="far fa-star"></i>' * (5 - review.rating))).html_safe %>
-              <%= review.content %>
-            </p>
-          <% end %>
+        <div class="header d-flex justify-content-start align-items-center">
+          <h1 class="my-0">Details for <%= @restaurant.name %></h1>
+          <p class="mx-3 my-0"><%= ('<i class="fas fa-2x fa-star"></i>' * @restaurant.rating + ('<i class="far fa-2x fa-star"></i>' * (5 - @restaurant.rating))).html_safe if @restaurant.rating %></p>
+        </div>
+        <p class="m-0"><%= @restaurant.category.capitalize %></p>
+        <p class="m-0"><%= @restaurant.address %></p>
+        <p class="m-0"><%= @restaurant.phone_number %></p>
+        <h3 class="my-3">Reviews</h3>
+        <div id="reviews-container" class="d-flex row">
+          <div class="col-12 col-lg-7">
+            <h5>What other customers think</h5>
+            <%= "<p class='font-italic my-3'>No reviews yet...</p>".html_safe unless @restaurant.reviews.any? %>
+            <% @restaurant.reviews.each do |review| %>
+              <p>
+                <%= ('<i class="fas fa-star"></i>' * review.rating + ('<i class="far fa-star"></i>' * (5 - review.rating))).html_safe %>
+                <%= review.content %>
+              </p>
+            <% end %>
+          </div>
+          <div id="leave-review" class="col-12 col-lg-5">
+            <h5>Leave a review</h5>
+            <%= render "reviews/form" %>
+          </div>
         </div>
       </div>
       <div class="menu-actions">
@@ -26,7 +35,6 @@
           <!-- <i class="fas fa-trash"></i> -->
         <%# end %>
       </div>
-
     </div>
   </div>
 </div>
